@@ -1,0 +1,8 @@
+footer .mine dd{
+    color: orange;
+}
+
+footer .mine span{
+    background:url(/static/img/mine_select.png) no-repeat;
+    background-size:0.513889rem;
+}

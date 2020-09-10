@@ -1,0 +1,8 @@
+footer .market dd{
+    color: orange;
+}
+
+footer .market span{
+    background:url(/static/img/market_select.png) no-repeat;
+    background-size:0.513889rem;
+}
