@@ -32,7 +32,7 @@ footer .home span{
 
 
 .topMenu {
-  padding-bottom: 0.26rem; }
+  padding-bottom: 0.06rem; }
 .topMenu nav {
   margin: 0.35rem 0 0.26rem;
   background: white; }
@@ -110,6 +110,7 @@ footer .home span{
   padding: 0.2rem 0;
   width: 9.2rem; }
 .mainInfo > section h3 {
+  font-size: 50px;
   text-align: center;
   height: 1.2rem;
   position: relative; }
