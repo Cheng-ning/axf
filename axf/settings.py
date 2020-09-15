@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'MineApp',
     'MarketApp',
     'CartApp',
+    'UserApp'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/upload')
+
+
+FONT_PATH=os.path.join(BASE_DIR,'static/fonts/ADOBEARABIC-BOLD.OTF')

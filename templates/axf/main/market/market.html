@@ -11,3 +11,120 @@
     {{ block.super }}
         闪购
 {% endblock %}
+
+{% block ext_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'axf/main/market/js/market.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <div id="market">
+        <aside>
+        <ul>
+            {% for foodtype in foodtypes %}
+            <li>
+                <a href="{% url 'axfmarket:market' %}?typeid={{ foodtype.typeid }}">{{ foodtype.typename }}</a>
+                {% if typeid == foodtype.typeid %}
+                    <span class="yellowSlide"></span>
+                {% endif %}
+
+            </li>
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <nav>
+        <ul>
+            <li>
+                <span id="all_type">
+                    {% for child in child_list %}
+                        {% if childcid == child.1 %}
+                            {{ child.0 }}
+                        {% endif %}
+                    {% endfor %}
+
+{#                    全部分类#}
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </span>
+            </li>
+            <li>
+                <span id="sort_rule">
+                    {% for sort_rule in sort_rule_list %}
+                        {% if rule == sort_rule.1 %}
+                            {{ sort_rule.0 }}
+                        {% endif %}
+                    {% endfor %}
+
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </span>
+
+            </li>
+        </ul>
+    </nav>
+    
+    <section>
+        <menu>
+            <ul>
+                {% for goods in goods_list %}
+                    <li>
+                    <a href="">
+                        <img src="/static{{ goods.productimg }}" alt="">
+                        <span class="shoppingInfo">
+                            <h6>{{ goods.productlongname }}</h6>
+                            <p class="detailTag">
+                                <span>精选</span>
+                                <span>{{ goods.productnum }}</span>
+                            </p>
+                            <span class="unit">
+                                {{ goods.specifics }}
+                            </span>
+
+                            <p class="price">
+                                <span>￥{{ goods.price }}</span>
+                                <s>￥{{ goods.marketprice }}</s>
+                            </p>
+                        </span>
+                    </a>
+                    <section class="subShopping">
+                        <button>-</button>
+                        <span>0</span>
+                        <button>+</button>
+                    </section>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div id="all_type_container" hidden="hidden">
+                <div>
+                    {% for child in child_list %}
+                        <a href="{% url 'axfmarket:market' %}?typeid={{ typeid }}&childcid={{ child.1 }}&sort={{ rule }}">
+                            {% if child.1 == childcid %}
+                                <span style="background: orange">{{ child.0 }}</span>
+                            {% else %}
+                                <span>{{ child.0 }}</span>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="sort_rule_container" hidden="hidden">
+                <div>
+                    {% for sort_rule in sort_rule_list %}
+                        <a href="{% url 'axfmarket:market' %}?typeid={{ typeid }}&childcid={{ childcid }}&sort={{ sort_rule.1 }}">
+                        {% if sort_rule.1 == rule %}
+                            <span style="background: orange">{{ sort_rule.0 }}</span>
+                        {% else %}
+                            <span>{{ sort_rule.0 }}</span>
+                        {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </menu>
+    </section>
+
+
+    </div>
+{% endblock %}
