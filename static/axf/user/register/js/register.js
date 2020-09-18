@@ -14,12 +14,14 @@ $(function () {
                     flagusername = true
                 }else {
                     $('#usernameinfo').html(data['message']).css('color', 'red')
+                    flagusername = false
                 }
 
             })
 
         } else {
             $('#usernameinfo').html('请输入6-8位英文或数字').css('color', 'red')
+            flagusername = false
         }
     })
 
@@ -32,6 +34,7 @@ $(function () {
             flagemail = true
         }else {
             $('#emailinfo').html('请输入正确的邮箱').css('color', 'red')
+            flagemail = false
         }
     })
 
@@ -43,6 +46,7 @@ $(function () {
             flagpassword = true
         } else {
             $('#passwordinfo2').html('密码不一致').css('color', 'red')
+            flagpassword = false
         }
     })
 

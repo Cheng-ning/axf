@@ -134,3 +134,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/upload')
 
 
 FONT_PATH=os.path.join(BASE_DIR,'static/fonts/ADOBEARABIC-BOLD.OTF')
+
+
+EMAIL_HOST='smtp.163.com'
+EMAIL_PORT=465
+EMAIL_HOST_USER='m17862726221@163.com'
+EMAIL_HOST_PASSWORD='OLAENTRANIYNDNUG'
+EMAIL_USE_SSL=True
+
+CACHES={
+        'default':{
+            'BACKEND':'django_redis.cache.RedisCache',
+            'LOCATION':'redis://127.0.0.1:6379/1',
+            'OPTIONS':{
+                    'CLIENT_CLASS':'django_redis.client.DefaultClient'
+            }
+        }
+    }

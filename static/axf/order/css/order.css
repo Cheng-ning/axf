@@ -1,0 +1,103 @@
+html, body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+    overflow-y:auto;
+    background:#eee;
+}
+
+header, footer{
+    width: 100%;
+    height: 1.5rem;
+    font-size:0.277777rem;
+    border-top:1px solid #f0f0f0;
+    z-index:10;
+    /*position:fixed;*/
+    display: flex;
+}
+header{
+    background: #11ff0a;
+    top:0;
+    left:0;
+}
+
+
+
+.menuList {
+    border-bottom: 0.04rem solid lightgrey;
+    height: 2.5rem;
+    position: relative;
+}
+
+
+.menuList > a {
+    width: 84%;
+    display: inline-block;
+    font-size: 0.4rem;
+    line-height: 1rem;
+}
+
+.menuList > a > img {
+    margin-top: 0.25rem;
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+.menuList > a > p {
+    width: 70%;
+    height: 1rem;
+    float: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.menuList > section {
+    position: absolute;
+    right: 0.4rem;
+    bottom: 0.4rem;
+    height: 0.75rem;
+    border-radius: 1rem;
+}
+
+
+.menuList > section > span {
+    display: inline-block;
+    width: 0.5rem;
+    text-align: center;
+    line-height: 0.5rem;
+    font-size: 0.4rem;
+}
+
+.menuList > section >span:before{
+    content: "x";
+}
+
+.presentPrice{
+    color: red;
+}
+
+.presentPrice:before {
+    content: "¥";
+    font-size: 0.33rem;
+}
+
+.total_price{
+    text-align: center;
+}
+
+#total_price{
+    margin: 0.3rem 0;
+    text-align: center;
+    color: red;
+}
+
+#total_price:before{
+    content: "¥";
+}

@@ -1,6 +1,10 @@
+import uuid
+from smtplib import SMTPRecipientsRefused
+
 from PIL import Image, ImageFont
 from PIL.ImageDraw import ImageDraw
 from django.contrib.auth.hashers import make_password,check_password
+from django.core.cache import cache
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 
@@ -9,6 +13,7 @@ from django.urls import reverse
 from six import BytesIO
 
 from UserApp.models import AxfUser
+from UserApp.view_helper import sendEmail
 from axf import settings
 
 
@@ -28,7 +33,16 @@ def register(request):
         user.password = password
         user.email = email
         user.icon = icon
-        user.token = '84d5d37e-8b27-42d5-a938-adeabb597a39'
+        token = uuid.uuid4()
+        user.token = token
+
+
+        try:
+            sendEmail(username, email, token)
+        except SMTPRecipientsRefused:
+            return HttpResponse('邮箱不存在')
+
+        cache.set(token, user.id, timeout=60)
         user.save()
 
         return redirect(reverse('axfuser:login'))
@@ -47,13 +61,16 @@ def login(request):
                 user = users[0]
                 password = request.POST.get('password')
                 if check_password(password, user.password):
-                    request.session['user_id'] = user.id
-                    return redirect(reverse('axfmine:mine'))
+                    if user.active:
+                        request.session['user_id'] = user.id
+                        return redirect(reverse('axfmine:mine'))
+                    else:
+                        return render(request, 'axf/user/login/login.html', {'msg': '账户未激活'})
                 else:
-                    return render(request, 'axf/user/login/login.html', {'msg': '密码错误'})
+                    return render(request, 'axf/user/login/login.html', {'msg': '用户名或密码错误'})
 
             else:
-                return render(request, 'axf/user/login/login.html', {'msg': '用户名错误'})
+                return render(request, 'axf/user/login/login.html', {'msg': '用户名或密码错误'})
         else:
             return render(request, 'axf/user/login/login.html', {'msg': '验证码错误'})
     else:
@@ -148,3 +165,17 @@ def generate_code():
         code += random.choice(source)
 
     return code
+
+
+def account(request):
+    token = request.GET.get('token')
+    user_id = cache.get(token)
+
+    if user_id:
+        user = AxfUser.objects.get(pk=user_id)
+        user.active = True
+        user.save()
+        cache.delete(token)
+        return HttpResponse('激活成功')
+    else:
+        return HttpResponse('邮件已过期，请重新发送')

@@ -15,6 +15,7 @@
 {% block ext_js %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'axf/main/market/js/market.js' %}"></script>
+    <script type="text/javascript" src="{% static 'axf/main/cart/js/cart.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -87,9 +88,9 @@
                         </span>
                     </a>
                     <section class="subShopping">
-                        <button>-</button>
+                        <button class="subCart">-</button>
                         <span>0</span>
-                        <button>+</button>
+                        <button class="addToCart" goodsid="{{ goods.id }}">+</button>
                     </section>
                 </li>
                 {% endfor %}
