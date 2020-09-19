@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'MineApp',
     'MarketApp',
     'CartApp',
-    'UserApp'
+    'UserApp',
+    'OrderApp'
 ]
 
 MIDDLEWARE = [
@@ -151,3 +152,7 @@ CACHES={
             }
         }
     }
+
+PUBLIC_KEY = open(os.path.join(BASE_DIR,'alipay_config/alipay_rsa_public_key.pem'),'r').read()
+
+PRIVATE_KEY = open(os.path.join(BASE_DIR,'alipay_config/app_rsa_private_key.pem'),'r').read()

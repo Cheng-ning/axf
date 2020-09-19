@@ -5,3 +5,27 @@
     {{ block.super }}
     <header></header>
 {% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    {% for ordergoods in order.axfordergoods_set.all %}
+        <div class="menuList">
+        <a href="">
+            <img src="/static{{ ordergoods.og_goods.productimg }}" alt="">
+            <p>{{ ordergoods.og_goods.productlongname }}</p>
+            <p class="presentPrice">{{ ordergoods.og_goods.price }}</p>
+        </a>
+
+    <section>
+        <span>{{ ordergoods.og_c_goods_num }}</span>
+    </section>
+    </div>
+    {% endfor %}
+
+
+    <div class="total_price">
+        <span id="total_price">{{ order.o_total_price }}</span>
+    </div>
+    <button class="btn btn-block btn-success">支付</button>
+
+{% endblock %}

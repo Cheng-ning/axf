@@ -27,6 +27,8 @@ urlpatterns = [
 
     url(r'^axfmine/', include('MineApp.urls', namespace='axfmine')),
 
-    url(r'^axfuser/', include('UserApp.urls', namespace='axfuser'))
+    url(r'^axfuser/', include('UserApp.urls', namespace='axfuser')),
+
+    url(r'^axforder/', include('OrderApp.urls', namespace='axforder'))
 
 ]
